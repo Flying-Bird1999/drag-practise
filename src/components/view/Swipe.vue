@@ -5,8 +5,8 @@
                :indicator-color="data.indicatorColor"
                style="height: 300px"
                :loop="data.loop" >
-        <van-swipe-item v-for="(image, index) in images" :key="index">
-            <img v-lazy="image" class="image" />
+        <van-swipe-item v-for="(image, index) in data.images" :key="index">
+            <img v-lazy="image" class="image"  />
         </van-swipe-item>
     </van-swipe>
 </template>
@@ -15,13 +15,16 @@
     export default {
         data() {
             return {
-                images: [
-                    require("../../assets/banner/1.jpg"),
-                    require("../../assets/banner/2.jpg"),
-                    require("../../assets/banner/3.jpg"),
-                    require("../../assets/banner/4.jpg"),
-                ],
+                // images: [
+                //     require("../../assets/banner/1.jpg"),
+                //     require("../../assets/banner/2.jpg"),
+                //     require("../../assets/banner/3.jpg"),
+                //     require("../../assets/banner/4.jpg"),
+                // ],
                 data: {
+                    images: [
+                        require("../../assets/banner/5.jpg")
+                    ],
                     vertical: false,
                     loop: false,
                     showIndicators: false,
@@ -35,7 +38,6 @@
         watch: {
             'editData'(newVal, oldVal){
                 this.data = newVal
-                console.log(this.data)
             }
         }
     }

@@ -1,14 +1,13 @@
 <template>
     <div>
-        <!--<el-upload-->
-                <!--class="upload-demo"-->
-                <!--:http-request="addFiles"-->
-                <!--:on-success="showSuccess"-->
-                <!--multiple-->
-                <!--:limit="9"-->
-                <!--action="http://localhost:3000/admin/index/addBanners">-->
-            <!--<el-button type="primary" plain>点击上传轮播图</el-button>-->
-        <!--</el-upload>-->
+        <el-upload
+                class="upload-demo"
+                :http-request="addFiles"
+                multiple
+                :limit="9"
+                action="http://localhost:3000/admin/index/addBanners">
+            <el-button type="primary" plain>点击上传轮播图</el-button>
+        </el-upload>
         <p>纵向滚动</p>
         <el-switch
                 v-model="SwipeData.vertical"
@@ -40,14 +39,14 @@
         data() {
             return {
                 SwipeData: {
-                    // images: [],
+                    images: [],
                     vertical: false,
-                    loop: false,
+                    loop: true,
                     showIndicators: false,
                     indicatorColor: '#409EFF',
-                    autoPlay: 2000,
+                    autoPlay: 2000
+                },
 
-                }
             }
         },
         props: ['childData'], //接收父组件的值
@@ -61,6 +60,11 @@
         methods: {
             dataChange() {
                 this.$emit('dataChange', this.SwipeData)
+            },
+            addFiles(params){
+                let imageUrl = URL.createObjectURL(params.file)
+                this.SwipeData.images.push(imageUrl)
+                this.dataChange()
             }
         }
     }

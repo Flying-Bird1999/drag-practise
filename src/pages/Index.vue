@@ -111,7 +111,7 @@
             getData(data){
                 // 接受孙组件，例如：ButtonEdit.vue 中的组件data值，并根据索引index赋给view中对应的data属性，可以传给子组件Button.vue
                 this.view[this.index].data = data
-                // console.log(this.view)
+                console.log(this.view)
             }
         },
         components: {

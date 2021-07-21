@@ -1,8 +1,8 @@
 <template>
     <van-field
-            :type="data.type"
-            :label="data.label"
-            :disabled ="data.disabled " />
+        :type="data.type"
+        :label="data.label"
+        :disabled ="data.disabled " />
 </template>
 
 <script>
@@ -21,7 +21,7 @@
         watch: {
             'editData'(newVal, oldVal){
                 this.data = newVal
-                console.log(this.data)
+                // console.log(this.data)
             }
         }
     }
