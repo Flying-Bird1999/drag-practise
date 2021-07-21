@@ -39,6 +39,7 @@
 <script>
     import Input from '../components/view/Input'
     import Button from '../components/view/Button'
+    import Swipe from '../components/view/Swipe'
     import Edit from '../components/Edit'
     export default {
         name: 'Index',
@@ -54,6 +55,11 @@
                         name: '按钮',
                         icon: 'el-icon-thumb',
                         component: Button
+                    },
+                    'swipe': {
+                        name: '轮播图',
+                        icon: 'el-icon-picture-outline',
+                        component: Swipe
                     }
                 },
                 view: [], //center中用于展示组件的数据
@@ -117,10 +123,9 @@
 <style scoped lang="scss">
     .container {
         display: flex;
-        justify-content: space-between;
         position: relative;
         .left, .center, .right {
-            width: 800px;
+            flex: 1;
             height: 100%;
             padding: 15px 0;
             background: #fff;
@@ -161,11 +166,13 @@
             }
         }
         .center {
-            width: 100%;
+            width: 450px;
             height: 580px;
             background: #eee;
             .view-content {
+                width: 100%;
                 height: 100%;
+                overflow: auto;
             }
         }
     }

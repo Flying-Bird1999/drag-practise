@@ -12,6 +12,7 @@
 <script>
     import ButtonEdit from './ButtonEdit'
     import InputEdit from './InputEdit'
+    import SwipeEdit from './SwipeEdit'
     export default {
         props: ['data'], //接收父组件的值
         data() {
@@ -26,6 +27,10 @@
                         name: '按钮',
                         component: ButtonEdit
                     },
+                    'swipe': {
+                        name: '轮播图',
+                        component: SwipeEdit
+                    }
                 }
             }
         },
