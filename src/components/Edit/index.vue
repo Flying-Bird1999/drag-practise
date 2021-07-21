@@ -1,12 +1,15 @@
 <template>
-    <div>
+    <div class="container">
         <h2>组件属性修改</h2>
-        <component
-            :is="type && typeList[type]['component']"
-            v-on="$listeners"
-            :childData="this.data.data"
-        ></component>
+        <div class="edit">
+            <component
+                    :is="type && typeList[type]['component']"
+                    v-on="$listeners"
+                    :childData="this.data.data"
+            ></component>
+        </div>
     </div>
+
 </template>
 
 <script>
@@ -47,5 +50,17 @@
 </script>
 
 <style scoped lang="scss">
+    .container {
+        display: flex;
+        flex-direction: column;
+        h2 {
+            margin-left: 100px;
+        }
+        .edit {
+            display: flex;
+            justify-content: center;
+
+        }
+    }
 
 </style>

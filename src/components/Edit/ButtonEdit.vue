@@ -1,7 +1,8 @@
 <template>
     <div>
+        <p>按钮文本内容</p>
         <el-input v-model="buttonData.text" placeholder="请输入内容" @change="dataChange"></el-input>
-
+        <p>选择按钮类型</p>
         <el-select v-model="buttonData.type" placeholder="请选择" @change="dataChange">
             <el-option
                     v-for="item in options"
@@ -10,7 +11,7 @@
                     :value="item.value">
             </el-option>
         </el-select>
-
+        <p>按钮尺寸</p>
         <el-radio-group v-model="buttonData.size" @change="dataChange">
             <el-radio label="large">大号</el-radio>
             <el-radio label="normal">普通</el-radio>

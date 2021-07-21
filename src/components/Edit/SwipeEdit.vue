@@ -19,6 +19,13 @@
                 v-model="SwipeData.loop"
                 @change="dataChange">
         </el-switch>
+        <p>是否显示指示器</p>
+        <el-switch
+                v-model="SwipeData.showIndicators"
+                @change="dataChange">
+        </el-switch>
+        <p>指示器颜色选择</p>
+        <el-color-picker v-model="SwipeData.indicatorColor" size="small"></el-color-picker>
         <p>轮播时间间隔</p>
         <el-input-number
                 v-model="SwipeData.autoPlay"
@@ -36,7 +43,10 @@
                     // images: [],
                     vertical: false,
                     loop: false,
-                    autoPlay: 2000
+                    showIndicators: false,
+                    indicatorColor: '#409EFF',
+                    autoPlay: 2000,
+
                 }
             }
         },

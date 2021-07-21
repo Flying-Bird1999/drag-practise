@@ -1,6 +1,8 @@
 <template>
     <van-swipe :autoplay="data.autoPlay"
                :vertical="data.vertical"
+               :show-indicators="data.showIndicators"
+               :indicator-color="data.indicatorColor"
                style="height: 300px"
                :loop="data.loop" >
         <van-swipe-item v-for="(image, index) in images" :key="index">
@@ -22,6 +24,8 @@
                 data: {
                     vertical: false,
                     loop: false,
+                    showIndicators: false,
+                    indicatorColor: '#409EFF',
                     autoPlay: 2000
                 }
             }

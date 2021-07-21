@@ -1,8 +1,9 @@
 <template>
     <div>
+        <p>输入框文本内容</p>
         <el-input v-model="inputData.label" placeholder="请输入文本" @change="dataChange"></el-input>
-
-        <el-select v-model="inputData.type" placeholder="请选择文本类型" @change="dataChange">
+        <p>选择输入框类型</p>
+        <el-select v-model="inputData.type" placeholder="请选择输入框类型" @change="dataChange">
             <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -10,8 +11,7 @@
                     :value="item.value">
             </el-option>
         </el-select>
-        <br />
-
+        <p>是否选择禁用</p>
         <el-switch
                 v-model="inputData.disabled"
                 @change="dataChange">
