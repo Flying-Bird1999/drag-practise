@@ -41,6 +41,7 @@
     import Button from '../components/view/Button'
     import Edit from '../components/Edit'
     export default {
+        name: 'Index',
         data() {
             return {
                 typeList: {
