@@ -17,7 +17,13 @@
     import InputEdit from './InputEdit'
     import SwipeEdit from './SwipeEdit'
     export default {
-        props: ['data'], //接收父组件的值
+        props: {  //接收父组件的值
+            data: {
+                default: ()=> {
+                    return {}
+                }
+            }
+        },
         data() {
             return {
                 type: '',

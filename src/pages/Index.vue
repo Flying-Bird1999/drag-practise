@@ -14,18 +14,20 @@
         </div>
         <div class="center">
             <div class="view-content" @dragover="dragOver" @drop="drop">
-                <ul>
-                    <li v-for="(item, i) in view"
-                        :key="i"
-                        @click="showEdit(i)"
-                        class="item" >
-                        <component
-                            :is="typeList[item.type]['component']"
-                            :editData="item.data"
-                        ></component>
-                        <i @click="deleteItem(i)" class="el-icon-error"></i>
-                    </li>
-                </ul>
+                <Draggable v-model="view" draggable=".item" tag="ul">
+                        <li v-for="(item, i) in view"
+                            :key="i"
+                            @click="showEdit(i)"
+                            class="item" >
+                            <div class="type" v-if="item.flag===1">{{item.type}}</div>
+                            <component
+                                    :is="typeList[item.type]['component']"
+                                    :editData="item.data"
+                                    v-else
+                            ></component>
+                            <i @click="deleteItem(i)" class="el-icon-error"></i>
+                        </li>
+                </Draggable>
             </div>
         </div>
         <div class="right">
@@ -43,8 +45,8 @@
     import Button from '../components/view/Button'
     import Swipe from '../components/view/Swipe'
     import Edit from '../components/Edit'
+    import Draggable from 'vuedraggable'
     export default {
-        name: 'Index',
         data() {
             return {
                 typeList: {
@@ -67,6 +69,7 @@
                 view: [], //center中用于展示组件的数据
                 type: '', //拖拽元素的类型
                 isPush: false, //判断拖拽元素是否已添加到页面
+                i: -1,
 
                 props: {}, //被点击组件的所有信息，用于传给‘修改组件属性值的组件’
                 rightIsShow: false,  //用于控制右边栏的显示与隐藏
@@ -80,13 +83,18 @@
                 // console.log(this.type)
             },
             dragOver(e){ //拖拽过程触发
+                //如果此时类型值为空，直接return，没有这一步操作的话，在center中移动，也会触发，甚至新建一个type为null的组件
+                if (!this.type) {
+                    return
+                }
                 e.preventDefault()
                 let defaultData = {
                     type: this.type,  // 组件类型
-                    data: {}  // 组件数据，默认为空
+                    data: {},  // 组件数据，默认为空
+                    flag: 1
                 }
                 if(!this.isPush) {  //判断如果还没添加进去的话...
-                    // this.index = this.view.length
+                    this.i = this.view.length
                     this.view.push(defaultData)
                     this.isPush = true  //表示元素已添加
                 }
@@ -97,9 +105,10 @@
                 }
                 e.preventDefault()
                 // 拖拽结束，isPush和type都置为初始值
+                this.$delete(this.view[this.i], 'flag')
                 this.isPush = false
                 this.type = null
-                // console.log(this.view)
+                console.log(this.view)
             },
             showEdit(i){
                 this.index = i  //点击组件，记录当前组件在数组中的索引
@@ -113,7 +122,7 @@
             getData(data){
                 // 接受孙组件，例如：ButtonEdit.vue 中的组件data值，并根据索引index赋给view中对应的data属性，可以传给子组件Button.vue
                 this.view[this.index].data = data
-                console.log(this.view)
+                // console.log(this.view)
             },
             deleteItem(i){
                 this.view.splice(i, 1)
@@ -121,7 +130,11 @@
             }
         },
         components: {
-            Input, Button, Edit
+            Draggable,
+            Edit,
+            Input,
+            Button,
+            Swipe,
         }
     }
 </script>
@@ -182,6 +195,14 @@
                 position: relative;
                 .item {
                     position: relative;
+                    .type {
+                        width: 100%;
+                        line-height: 20px;
+                        text-align: center;
+                        background-color: #deedff;
+                        font-size: 12px;
+                        color: #666;
+                    }
                     .el-icon-error {
                         position: absolute;
                         top: 0;
