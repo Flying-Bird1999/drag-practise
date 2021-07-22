@@ -17,11 +17,13 @@
                 <ul>
                     <li v-for="(item, i) in view"
                         :key="i"
-                        @click="showEdit(i)">
+                        @click="showEdit(i)"
+                        class="item" >
                         <component
                             :is="typeList[item.type]['component']"
                             :editData="item.data"
                         ></component>
+                        <i @click="deleteItem(i)" class="el-icon-error"></i>
                     </li>
                 </ul>
             </div>
@@ -112,6 +114,10 @@
                 // 接受孙组件，例如：ButtonEdit.vue 中的组件data值，并根据索引index赋给view中对应的data属性，可以传给子组件Button.vue
                 this.view[this.index].data = data
                 console.log(this.view)
+            },
+            deleteItem(i){
+                this.view.splice(i, 1)
+                this.rightIsShow = false
             }
         },
         components: {
@@ -173,6 +179,16 @@
                 width: 100%;
                 height: 100%;
                 overflow: auto;
+                position: relative;
+                .item {
+                    position: relative;
+                    .el-icon-error {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                    }
+                }
+
             }
         }
     }
