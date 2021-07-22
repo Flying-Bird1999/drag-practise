@@ -30,7 +30,6 @@
                 v-model="SwipeData.autoPlay"
                 @change="dataChange">
         </el-input-number>
-
     </div>
 </template>
 
@@ -45,8 +44,7 @@
                     showIndicators: false,
                     indicatorColor: '#409EFF',
                     autoPlay: 2000
-                },
-
+                }
             }
         },
         props: ['childData'], //接收父组件的值
