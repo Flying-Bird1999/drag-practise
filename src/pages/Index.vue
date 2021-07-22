@@ -1,3 +1,8 @@
+<!--
+    组件内部拖拽，如果是不同type的组件会出现bug
+    组件删除会出现bug
+    解决办法：想办法给每一个组件定义唯一的索引值
+-->
 <template>
     <div class="container">
         <div class="left">
@@ -15,18 +20,20 @@
         <div class="center">
             <div class="view-content" @dragover="dragOver" @drop="drop">
                 <Draggable v-model="view" draggable=".item" tag="ul">
-                        <li v-for="(item, i) in view"
-                            :key="i"
-                            @click="showEdit(i)"
-                            class="item" >
-                            <div class="type" v-if="item.flag===1">{{item.type}}</div>
-                            <component
-                                    :is="typeList[item.type]['component']"
-                                    :editData="item.data"
-                                    v-else
-                            ></component>
-                            <i @click="deleteItem(i)" class="el-icon-error"></i>
-                        </li>
+                <!--<ul>-->
+                    <li v-for="(item, i) in view"
+                        :key="i"
+                        @click="showEdit(i)"
+                        class="item" >
+                        <div class="type" v-if="item.flag===1">{{item.type}}</div>
+                        <component
+                                :is="typeList[item.type]['component']"
+                                :editData="item.data"
+                                v-else
+                        ></component>
+                        <i @click="deleteItem(i)" class="el-icon-error"></i>
+                    </li>
+                <!--</ul> -->
                 </Draggable>
             </div>
         </div>
@@ -110,10 +117,10 @@
                 this.type = null
                 console.log(this.view)
             },
-            showEdit(i){
-                this.index = i  //点击组件，记录当前组件在数组中的索引
+            showEdit(index){
+                this.index = index  //点击组件，记录当前组件在数组中的索引
                 this.rightIsShow = false
-                this.props = this.view[i] //将该组件的值赋给props，传给子组件
+                this.props = this.view[index] //将该组件的值赋给props，传给子组件
                 // console.log(this.props)
                 this.$nextTick(()=>{
                     this.rightIsShow = true //在dom更新后改变rightIsShow，可刷新页面
@@ -122,11 +129,12 @@
             getData(data){
                 // 接受孙组件，例如：ButtonEdit.vue 中的组件data值，并根据索引index赋给view中对应的data属性，可以传给子组件Button.vue
                 this.view[this.index].data = data
-                // console.log(this.view)
+                console.log(this.view)
             },
             deleteItem(i){
                 this.view.splice(i, 1)
                 this.rightIsShow = false
+                this.props = {}
             }
         },
         components: {
