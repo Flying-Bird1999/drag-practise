@@ -1,12 +1,11 @@
 <template>
     <div class="container">
         <div class="left">
-            <ul @dragstart="dragStart">
+            <ul @dragstart="dragStart" @dragend="dragEnd">
                 <li v-for="(item, key, index) in typeList"
                     :key="index"
                     draggable
-                    :data-type="key"
-                >
+                    :data-type="key" >
                     <i :class="item.icon"></i>
                     <p>{{item.name}}</p>
                 </li>
@@ -14,29 +13,34 @@
         </div>
         <div class="center">
             <div class="view-content" @dragover="dragOver" @drop="drop">
-                <Draggable v-model="view" draggable=".item" tag="ul">
+                <Draggable v-model="view"
+                           draggable=".item"
+                           tag="ul"
+                           animation="300" >
+                    <transition-group>
                     <!--<ul>-->
-                    <li v-for="(item, i) in view"
-                        :key="item.id"
-                        @click="showEdit(item.id)"
-                        class="item" >
-                        <div class="type" v-if="item.flag&&item.flag===1">{{item.type}}</div>
-                        <component
-                                :is="typeList[item.type]['component']"
-                                :editData="item.data"
-                                v-else
-                        ></component>
-                        <i @click="deleteItem(item.id)" class="el-icon-error"></i>
-                    </li>
+                        <li v-for="(item, i) in view"
+                            :key="item.id"
+                            @click="showEdit(item.id)"
+                            class="item" >
+                            <div class="type" v-if="item.flag&&item.flag===1">
+                                {{item.type}}
+                            </div>
+                            <component :is="typeList[item.type]['component']"
+                                        :editData="item.data"
+                                        v-else >
+                            </component>
+                            <i @click="deleteItem(item.id)" class="el-icon-error"></i>
+                        </li>
+                    </transition-group>
                     <!--</ul> -->
                 </Draggable>
             </div>
         </div>
         <div class="right">
-            <Edit
-                    :data="props"
-                    v-if="rightIsShow"
-                    @dataChange="getData"
+            <Edit :data="props"
+                  v-if="rightIsShow"
+                  @dataChange="getData"
             />
         </div>
     </div>
@@ -48,7 +52,7 @@
     import Swipe from '../components/view/Swipe'
     import Edit from '../components/Edit'
     import Draggable from 'vuedraggable'
-    import {indexList} from '../utils/data' //把typeList提炼出去
+    import {indexList} from '../utils/data'  //把typeList提炼出去
     export default {
         data() {
             return {
@@ -90,16 +94,20 @@
                     this.isPush = true  //表示元素已添加
                 }
             },
-            drop(e){  //拖拽结束，鼠标释放
-                if (!this.type) {  //如果此时类型值为空，直接return
-                    return
-                }
-                e.preventDefault()
+            // 该方法不管拖拽有无在指定容器内释放都会触发
+            dragEnd(){
                 // 删除组件的flag属性
                 this.$delete(this.view.filter(item=>item.id===this.i)[0], 'flag')
                 // 拖拽结束，isPush和type都置为初始值
                 this.isPush = false
                 this.type = null
+            },
+            drop(e){  //拖拽结束，鼠标释放
+                if (!this.type) {  //如果此时类型值为空，直接return
+                    return
+                }
+                e.preventDefault()
+                this.dragEnd()
                 // console.log(this.view)
             },
             showEdit(id){
@@ -120,7 +128,6 @@
             deleteItem(id){
                 this.view = this.view.filter(item => item.id !== id)
                 this.rightIsShow = false
-                // this.props = {}
             }
         },
         components: {
@@ -160,7 +167,7 @@
                     float: left;
                     margin: 0 10px;
                     border-radius: 6px;
-                    cursor: pointer;
+                    cursor: move;
                     &:hover{
                         background: #efefef;
                     }
@@ -188,7 +195,12 @@
                 overflow: auto;
                 position: relative;
                 .item {
+                    box-sizing: border-box;
                     position: relative;
+                    &:hover {
+                        cursor: move;
+                        border: 3px solid transparent;
+                    }
                     .type {
                         width: 100%;
                         line-height: 20px;
@@ -201,6 +213,7 @@
                         position: absolute;
                         top: 0;
                         right: 0;
+                        cursor: pointer;
                     }
                 }
 

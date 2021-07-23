@@ -2,11 +2,10 @@
     <div class="container">
         <h2>组件属性修改</h2>
         <div class="edit">
-            <component
-                    :is="type && typeList[type]['component']"
-                    v-on="$listeners"
-                    :childData="this.data.data"
-            ></component>
+            <component :is="type && typeList[type]['component']"
+                        v-on="$listeners"
+                        :childData="this.data.data">
+            </component>
         </div>
     </div>
 
@@ -16,12 +15,12 @@
     import ButtonEdit from './ButtonEdit'
     import InputEdit from './InputEdit'
     import SwipeEdit from './SwipeEdit'
-    import {editList} from '../../utils/data'
+    import {editList} from '../../utils/data' //把typeList提炼出去
     export default {
         props: {  //接收父组件的值
             data: {
                 default: ()=> {
-                    return {}
+                    return {} //默认值为空对象
                 }
             }
         },
