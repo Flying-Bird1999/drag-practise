@@ -149,12 +149,15 @@
             background: #fff;
         }
         .left {
+            height: 590px;
             ul{
                 margin: 0;
                 padding: 0;
+                display: flex;
+                justify-content: space-around;
                 li{
-                    width: 100px;
-                    height: 100px;
+                    width: 85px;
+                    height: 85px;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -162,8 +165,6 @@
                     list-style: none;
                     font-size: 16px;
                     color: #666;
-                    float: left;
-                    margin: 0 10px;
                     border-radius: 6px;
                     cursor: move;
                     &:hover{
@@ -171,7 +172,7 @@
                     }
                     i{
                         display: block;
-                        font-size: 30px;
+                        font-size: 26px;
                         margin-bottom: 8px;
                         color: #999;
                     }
@@ -184,22 +185,31 @@
             }
         }
         .center {
-            margin: 0;
+            margin-top: 10px;
             padding: 0;
-            width: 450px;
+            width: 500px;
             height: 600px;
             background: #eee;
             .view-content {
-                width: 100%;
-                height: 100%;
+                background: #fff;
+                width: 460px;
+                height: 560px;
+                margin: 20px;
+                border-radius: 6px;
                 overflow: auto;
                 position: relative;
                 .item {
                     box-sizing: border-box;
                     position: relative;
+                    border-bottom: 2px dotted #80BBF8;
+                    border-left: 2px dotted #80BBF8;
+                    border-right: 2px dotted #80BBF8;
+                    &:first-child {
+                        border-top: 2px dotted #80BBF8;
+                    }
                     &:hover {
                         cursor: move;
-                        border: 2px dotted #63ABF7;
+                        border: 2px solid #63ABF7;
                     }
                     .type {
                         width: 100%;

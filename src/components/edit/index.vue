@@ -48,6 +48,8 @@
     .container {
         display: flex;
         flex-direction: column;
+        height: 590px;
+        overflow: auto;
         h2 {
             margin-left: 100px;
         }
