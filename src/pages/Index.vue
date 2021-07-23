@@ -21,6 +21,8 @@
                         <li v-for="(item, i) in view"
                             :key="item.id"
                             @click="showEdit(item.id)"
+                            @mouseenter="item.isDelete=true"
+                            @mouseleave="item.isDelete=false"
                             class="item" >
                             <div class="type" v-if="item.flag&&item.flag===1">
                                 {{item.type}}
@@ -29,7 +31,7 @@
                                         :editData="item.data"
                                         v-else >
                             </component>
-                            <i @click="deleteItem(item.id)" class="el-icon-error"></i>
+                            <i v-show="item.isDelete" @click="deleteItem(item.id)" class="el-icon-delete"></i>
                         </li>
                     </transition-group>
                 </Draggable>
@@ -65,7 +67,7 @@
 
                 index: -1, //临时变量，点击组件时记录页面正在修改的组件的id值
 
-                id: 0 //给每一个组件定义一个唯一索引，每次递增
+                id: 0, //给每一个组件定义一个唯一索引，每次递增
             }
         },
         methods: {
@@ -84,7 +86,8 @@
                         id: this.id++,  // 给每一个组件定义一个唯一索引
                         type: this.type,  // 组件类型
                         data: {},  // 组件数据，默认为空
-                        flag: 1 ////临时变量，拖拽时给组件附上该属性，释放时删除该属性
+                        flag: 1, ////临时变量，拖拽时给组件附上该属性，释放时删除该属性
+                        isDelete: false //控制删除图标的显示与隐藏
                     }
                     this.i = defaultData.id  //方便释放时找到flag属性，并删除
                     // console.log(this.i)
@@ -197,7 +200,7 @@
                     position: relative;
                     &:hover {
                         cursor: move;
-                        border: 3px solid transparent;
+                        border: 2px solid #63ABF7;
                     }
                     .type {
                         width: 100%;
@@ -207,14 +210,20 @@
                         font-size: 12px;
                         color: #666;
                     }
-                    .el-icon-error {
+                    .el-icon-delete {
+                        width: 30px;
+                        line-height: 30px;
+                        background-color: #fff;
+                        border-radius: 50%;
+                        text-align: center;
+                        font-size: 16px;
+                        color: #676769;
                         position: absolute;
                         top: 0;
                         right: 0;
                         cursor: pointer;
                     }
                 }
-
             }
         }
     }
