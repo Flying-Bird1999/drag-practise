@@ -187,7 +187,7 @@
             margin: 0;
             padding: 0;
             width: 450px;
-            height: 580px;
+            height: 600px;
             background: #eee;
             .view-content {
                 width: 100%;
