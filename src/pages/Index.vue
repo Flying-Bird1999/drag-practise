@@ -20,7 +20,7 @@
                         :key="item.id"
                         @click="showEdit(item.id)"
                         class="item" >
-                        <div class="type" v-if="item.flag===1">{{item.type}}</div>
+                        <div class="type" v-if="item.flag&&item.flag===1">{{item.type}}</div>
                         <component
                                 :is="typeList[item.type]['component']"
                                 :editData="item.data"
@@ -76,7 +76,7 @@
                 props: {}, //被点击组件的所有信息，用于传给‘修改组件属性值的组件’
                 rightIsShow: false,  //用于控制右边栏的显示与隐藏
 
-                index: -1, //临时记录页面正在修改的组件的id值
+                index: -1, //临时变量，点击组件时记录页面正在修改的组件的id值
 
                 id: 0 //给每一个组件定义一个唯一索引，每次递增
             }
@@ -111,8 +111,8 @@
                 }
                 e.preventDefault()
                 // 删除组件的flag属性
+                // console.log(this.i)
                 this.$delete(this.view.filter(item=>item.id===this.i)[0], 'flag')
-                // this.$delete(this.view[this.i], 'flag')
                 // 拖拽结束，isPush和type都置为初始值
                 this.isPush = false
                 this.type = null
@@ -136,7 +136,7 @@
             deleteItem(id){
                 this.view = this.view.filter(item => item.id !== id)
                 this.rightIsShow = false
-                this.props = {}
+                // this.props = {}
             }
         },
         components: {
