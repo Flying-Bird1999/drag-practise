@@ -47,7 +47,7 @@
 </template>
 
 <script>
-    import Edit from '../components/Edit'
+    import Edit from '../components/edit'
     import Input from '../components/view/Input'
     import Button from '../components/view/Button'
     import Swipe from '../components/view/Swipe'
@@ -189,6 +189,8 @@
             }
         }
         .center {
+            margin: 0;
+            padding: 0;
             width: 450px;
             height: 580px;
             background: #eee;
@@ -202,7 +204,7 @@
                     position: relative;
                     &:hover {
                         cursor: move;
-                        border: 2px solid #63ABF7;
+                        border: 2px dotted #63ABF7;
                     }
                     .type {
                         width: 100%;

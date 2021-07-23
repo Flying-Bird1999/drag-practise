@@ -8,7 +8,6 @@
             </component>
         </div>
     </div>
-
 </template>
 
 <script>
