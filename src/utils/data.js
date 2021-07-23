@@ -13,6 +13,11 @@ export let indexList = {
         name: '轮播图',
         icon: 'el-icon-picture-outline',
         component: 'Swipe'
+    },
+    'rate': {
+        name: '评分',
+        icon: 'el-icon-star-off',
+        component: 'Rate'
     }
 }
 
@@ -28,5 +33,9 @@ export let editList =  {
     'swipe': {
         name: '轮播图',
         component: 'SwipeEdit'
+    },
+    'rate': {
+        name: '评分',
+        component: 'RateEdit'
     }
 }

@@ -4,13 +4,14 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 Vue.use(ElementUI)
 
-import { Button, Form, Field, Swipe, SwipeItem,Lazyload } from 'vant'
+import { Button, Form, Field, Swipe, SwipeItem, Lazyload, Rate } from 'vant'
 Vue.use(Button)
 Vue.use(Field)
 Vue.use(Form)
 Vue.use(Swipe)
 Vue.use(SwipeItem)
 Vue.use(Lazyload)
+Vue.use(Rate)
 
 new Vue({
     render: h => h(App),

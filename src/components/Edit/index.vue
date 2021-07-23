@@ -15,6 +15,7 @@
     import ButtonEdit from './ButtonEdit'
     import InputEdit from './InputEdit'
     import SwipeEdit from './SwipeEdit'
+    import RateEdit from './RateEdit'
     import {editList} from '../../utils/data' //把typeList提炼出去
     export default {
         props: {  //接收父组件的值
@@ -38,7 +39,8 @@
         components: {
             ButtonEdit,
             InputEdit,
-            SwipeEdit
+            SwipeEdit,
+            RateEdit
         }
     }
 </script>

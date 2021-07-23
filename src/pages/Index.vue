@@ -47,10 +47,11 @@
 </template>
 
 <script>
+    import Edit from '../components/Edit'
     import Input from '../components/view/Input'
     import Button from '../components/view/Button'
     import Swipe from '../components/view/Swipe'
-    import Edit from '../components/Edit'
+    import Rate from '../components/view/Rate'
     import Draggable from 'vuedraggable'
     import {indexList} from '../utils/data'  //把typeList提出去
     export default {
@@ -137,6 +138,7 @@
             Input,
             Button,
             Swipe,
+            Rate
         }
     }
 </script>
