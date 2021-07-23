@@ -16,6 +16,7 @@
     import ButtonEdit from './ButtonEdit'
     import InputEdit from './InputEdit'
     import SwipeEdit from './SwipeEdit'
+    import {editList} from '../../utils/data'
     export default {
         props: {  //接收父组件的值
             data: {
@@ -27,20 +28,7 @@
         data() {
             return {
                 type: '',
-                typeList: {
-                    'input': {
-                        name: '输入框',
-                        component: InputEdit
-                    },
-                    'button': {
-                        name: '按钮',
-                        component: ButtonEdit
-                    },
-                    'swipe': {
-                        name: '轮播图',
-                        component: SwipeEdit
-                    }
-                }
+                typeList: editList
             }
         },
         mounted(){
@@ -50,7 +38,8 @@
         },
         components: {
             ButtonEdit,
-            InputEdit
+            InputEdit,
+            SwipeEdit
         }
     }
 </script>

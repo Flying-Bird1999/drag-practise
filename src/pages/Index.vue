@@ -48,26 +48,11 @@
     import Swipe from '../components/view/Swipe'
     import Edit from '../components/Edit'
     import Draggable from 'vuedraggable'
+    import {indexList} from '../utils/data' //把typeList提炼出去
     export default {
         data() {
             return {
-                typeList: {
-                    'input': {
-                        name: '输入框',
-                        icon: 'el-icon-search',
-                        component: Input
-                    },
-                    'button': {
-                        name: '按钮',
-                        icon: 'el-icon-thumb',
-                        component: Button
-                    },
-                    'swipe': {
-                        name: '轮播图',
-                        icon: 'el-icon-picture-outline',
-                        component: Swipe
-                    }
-                },
+                typeList: indexList,
                 view: [], //center中用于展示组件的数据
                 type: '', //拖拽元素的类型
                 isPush: false, //判断拖拽元素是否已添加到页面
@@ -111,7 +96,6 @@
                 }
                 e.preventDefault()
                 // 删除组件的flag属性
-                // console.log(this.i)
                 this.$delete(this.view.filter(item=>item.id===this.i)[0], 'flag')
                 // 拖拽结束，isPush和type都置为初始值
                 this.isPush = false
