@@ -1,8 +1,3 @@
-<!--
-    组件内部拖拽，如果是不同type的组件会出现bug
-    组件删除会出现bug
-    解决办法：想办法给每一个组件定义唯一的索引值
--->
 <template>
     <div class="container">
         <div class="left">
