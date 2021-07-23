@@ -55,6 +55,9 @@
     import Draggable from 'vuedraggable'
     import {indexList} from '../utils/data'  //把typeList提出去
     export default {
+        components: {
+            Draggable, Edit, Input, Button, Swipe, Rate
+        },
         data() {
             return {
                 typeList: indexList,
@@ -131,14 +134,6 @@
                 this.view = this.view.filter(item => item.id !== id)
                 this.rightIsShow = false
             }
-        },
-        components: {
-            Draggable,
-            Edit,
-            Input,
-            Button,
-            Swipe,
-            Rate
         }
     }
 </script>

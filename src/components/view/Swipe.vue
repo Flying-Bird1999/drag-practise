@@ -3,10 +3,10 @@
                :vertical="data.vertical"
                :show-indicators="data.showIndicators"
                :indicator-color="data.indicatorColor"
-               style="height: 300px"
+               style="height: 300px; margin: 0;"
                :loop="data.loop" >
         <van-swipe-item v-for="(image, index) in data.images" :key="index">
-            <img v-lazy="image" class="image"  />
+            <img v-lazy="image" class="image" />
         </van-swipe-item>
     </van-swipe>
 </template>
@@ -50,5 +50,8 @@
         line-height: 150px;
         text-align: center;
         background-color: #39a9ed;
+        .image {
+            width: 100%;
+        }
     }
 </style>
