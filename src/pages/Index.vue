@@ -18,7 +18,6 @@
                            tag="ul"
                            animation="300" >
                     <transition-group>
-                    <!--<ul>-->
                         <li v-for="(item, i) in view"
                             :key="item.id"
                             @click="showEdit(item.id)"
@@ -33,7 +32,6 @@
                             <i @click="deleteItem(item.id)" class="el-icon-error"></i>
                         </li>
                     </transition-group>
-                    <!--</ul> -->
                 </Draggable>
             </div>
         </div>
