@@ -50,7 +50,7 @@
     import Swipe from '../components/view/Swipe'
     import Edit from '../components/Edit'
     import Draggable from 'vuedraggable'
-    import {indexList} from '../utils/data'  //把typeList提炼出去
+    import {indexList} from '../utils/data'  //把typeList提出去
     export default {
         data() {
             return {
