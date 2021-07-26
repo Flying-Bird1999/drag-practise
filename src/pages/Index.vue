@@ -31,7 +31,10 @@
                                         :editData="item.data"
                                         v-else >
                             </component>
-                            <i v-show="item.isDelete" @click="deleteItem(item.id)" class="el-icon-delete"></i>
+                            <i v-show="item.isDelete"
+                               @click="deleteItem(item.id)"
+                               class="el-icon-delete">
+                            </i>
                         </li>
                     </transition-group>
                 </Draggable>
@@ -71,7 +74,7 @@
 
                 index: -1, //临时变量，点击组件时记录页面正在修改的组件的id值
 
-                id: 0, //给每一个组件定义一个唯一索引，每次递增
+                id: 0, //给每一个组件定义一个唯一的id索引，每次递增
             }
         },
         methods: {
@@ -149,7 +152,7 @@
             background: #fff;
         }
         .left {
-            height: 590px;
+            height: 640px;
             ul{
                 margin: 0;
                 padding: 0;

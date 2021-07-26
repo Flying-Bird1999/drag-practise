@@ -17,6 +17,9 @@
     import RateEdit from './RateEdit'
     import {editList} from '../../utils/data' //把typeList提炼出去
     export default {
+        components: {
+            ButtonEdit, InputEdit, SwipeEdit, RateEdit
+        },
         props: {  //接收父组件的值
             data: {
                 default: ()=> {
@@ -34,12 +37,6 @@
             // 记录点击组件的类型，根据类型展示对应的edit组件
             this.type = this.data.type
             // console.log(this.data)
-        },
-        components: {
-            ButtonEdit,
-            InputEdit,
-            SwipeEdit,
-            RateEdit
         }
     }
 </script>
@@ -48,7 +45,7 @@
     .container {
         display: flex;
         flex-direction: column;
-        height: 590px;
+        height: 640px;
         overflow: auto;
         h2 {
             margin-left: 150px;

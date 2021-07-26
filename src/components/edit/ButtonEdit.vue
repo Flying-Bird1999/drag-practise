@@ -22,8 +22,10 @@
 </template>
 
 <script>
+    import {editMixins} from '../../mixins/editMixins'
     export default {
         name: 'ButtonEdit',
+        mixins: [editMixins],
         data() {
             return {
                 //该对象用于控制展示组件的属性值
@@ -56,21 +58,21 @@
                 ]
             }
         },
-        props: ['childData'], //接收父组件的值
-        mounted(){
-            // 判断对象为空直接return，使用默认的buttonData值
-            if(JSON.stringify(this.childData)==='{}') {
-                return
-            }
-            // console.log(this.childData)
-            this.buttonData = this.childData
-        },
-        methods: {
-            // 对象属性值改变，触发函数将改变后的对象传给“爷爷组件”
-            dataChange(){
-                this.$emit('dataChange', this.buttonData)
-            }
-        }
+        // props: ['childData'], //接收父组件的值
+        // mounted(){
+        //     // 判断对象为空直接return，使用默认的buttonData值
+        //     if(JSON.stringify(this.childData)==='{}') {
+        //         return
+        //     }
+        //     // console.log(this.childData)
+        //     this.buttonData = this.childData
+        // },
+        // methods: {
+        //     // 对象属性值改变，触发函数将改变后的对象传给“爷爷组件”
+        //     dataChange(){
+        //         this.$emit('dataChange', this.buttonData)
+        //     }
+        // }
     }
 </script>
 
