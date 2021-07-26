@@ -51,7 +51,7 @@
         height: 590px;
         overflow: auto;
         h2 {
-            margin-left: 100px;
+            margin-left: 150px;
         }
         .edit {
             display: flex;

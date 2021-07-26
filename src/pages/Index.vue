@@ -185,16 +185,19 @@
             }
         }
         .center {
-            margin-top: 10px;
+            margin-top: 30px;
             padding: 0;
             width: 500px;
-            height: 600px;
+            height: 640px;
             background: #eee;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             .view-content {
+                box-sizing: border-box;
                 background: #fff;
                 width: 460px;
-                height: 560px;
-                margin: 20px;
+                height: 600px;
                 border-radius: 6px;
                 overflow: auto;
                 position: relative;
