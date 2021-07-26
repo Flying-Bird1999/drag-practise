@@ -55,7 +55,7 @@
                         value: 'danger',
                         label: '危险按钮'
                     }
-                ]
+                ],
             }
         },
         // props: ['childData'], //接收父组件的值
