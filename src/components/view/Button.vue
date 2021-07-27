@@ -1,5 +1,7 @@
 <template>
-    <van-button :type="data.type" :size="data.size">{{data.text}}</van-button>
+    <div>
+        <van-button :type="data.type" :size="data.size">{{data.text}}</van-button>
+    </div>
 </template>
 
 <script>

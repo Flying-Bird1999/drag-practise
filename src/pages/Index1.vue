@@ -20,7 +20,6 @@
                     <transition-group>
                         <li v-for="(item, i) in view"
                             :key="item.id"
-                            :data-id="item.id"
                             @click="showEdit(item.id)"
                             @mouseenter="item.isDelete=true"
                             @mouseleave="item.isDelete=false"
@@ -89,49 +88,18 @@
                     return
                 }
                 e.preventDefault()
-                e.stopPropagation()
-                let className = e.target.className
-                let defaultData
-                if(!this.isPush) {
-                    defaultData = {
+                if(!this.isPush) {  //判断如果还没添加进去的话...
+                    let defaultData = {
                         id: this.id++,  // 给每一个组件定义一个唯一索引
                         type: this.type,  // 组件类型
                         data: {},  // 组件数据，默认为空
                         flag: 1, ////临时变量，拖拽时给组件附上该属性，释放时删除该属性
                         isDelete: false //控制删除图标的显示与隐藏
                     }
-                }
-                // 在空白处添加组件
-                if(className === 'view-content') {
-                    if(!this.isPush) {  //判断如果还没添加进去的话...
-                        this.i = defaultData.id  //方便释放时找到flag属性，并删除
-                        // console.log(this.i)
-                        this.view.push(defaultData)
-                        this.isPush = true  //表示元素已添加
-                    }
-                }else {
-                    let target = e.target
-                    // 分别获取鼠标在元素的垂直距离、元素的高度、元素的id值
-                    let [ y, h, curId ] = [ e.offsetY, target.offsetHeight, target.dataset.id ]
-                    // 返回布尔值，true表示位于元素的上半部分，false表示在下半部分
-                    let direction = y < (h / 2)
-                    if(!this.isPush) {
-                        // 将view中的id值提取出为一个数组，方便取出id值
-                        let idArr = this.view.map(item => item.id)
-                        // 判断在元素的上半部分
-                        if(direction) {
-                            let curIndex = idArr.findIndex(id => id==curId)
-                            this.i = defaultData.id
-                            this.view.splice(curIndex, 0, defaultData)
-                        }else {
-                            // 判断在元素的下半部分
-                            let curIndex = idArr.findIndex(id => id==curId)
-                            this.i = defaultData.id
-                            this.view.splice(curIndex+1, 0, defaultData)
-                        }
-                    }
-
-                    this.isPush = true
+                    this.i = defaultData.id  //方便释放时找到flag属性，并删除
+                    // console.log(this.i)
+                    this.view.push(defaultData)
+                    this.isPush = true  //表示元素已添加
                 }
             },
             // 该方法不管拖拽有无在指定容器内释放都会触发
@@ -148,7 +116,7 @@
                 }
                 e.preventDefault()
                 this.dragEnd()
-                console.log(this.view)
+                // console.log(this.view)
             },
             showEdit(id){
                 this.index = id  //点击组件，记录当前点击组件的id值
@@ -237,7 +205,6 @@
                 overflow: auto;
                 position: relative;
                 .item {
-                    z-index: 9999;
                     width: 100%;
                     height: 100%;
                     box-sizing: border-box;
@@ -251,10 +218,6 @@
                     &:hover {
                         cursor: move;
                         border: 2px solid #63ABF7;
-                    }
-                    /* 使得只有 .item 能够获得焦点 */
-                    div{
-                        pointer-events: none;
                     }
                     .type {
                         width: 100%;
