@@ -105,7 +105,6 @@
                 if(className === 'view-content') {
                     if(!this.isPush) {  //判断如果还没添加进去的话...
                         this.i = defaultData.id  //方便释放时找到flag属性，并删除
-                        // console.log(this.i)
                         this.view.push(defaultData)
                         this.isPush = true  //表示元素已添加
                     }
@@ -118,13 +117,11 @@
                     if(!this.isPush) {
                         // 将view中的id值提取出为一个数组，方便取出id值
                         let idArr = this.view.map(item => item.id)
-                        // 判断在元素的上半部分
-                        if(direction) {
+                        if(direction) {     // 判断在元素的上半部分
                             let curIndex = idArr.findIndex(id => id==curId)
                             this.i = defaultData.id
                             this.view.splice(curIndex, 0, defaultData)
-                        }else {
-                            // 判断在元素的下半部分
+                        }else {         // 判断在元素的下半部分
                             let curIndex = idArr.findIndex(id => id==curId)
                             this.i = defaultData.id
                             this.view.splice(curIndex+1, 0, defaultData)
