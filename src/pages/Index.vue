@@ -114,20 +114,45 @@
                     let [ y, h, curId ] = [ e.offsetY, target.offsetHeight, target.dataset.id ]
                     // 返回布尔值，true表示位于元素的上半部分，false表示在下半部分
                     let direction = y < (h / 2)
+                    // 将view中的id值提取出为一个数组，方便取出id值
+                    let idArr = this.view.map(item => item.id)
                     if(!this.isPush) {
-                        // 将view中的id值提取出为一个数组，方便取出id值
-                        let idArr = this.view.map(item => item.id)
-                        if(direction) {     // 判断在元素的上半部分
+                        if(direction) { // 判断在元素的上半部分
                             let curIndex = idArr.findIndex(id => id==curId)
                             this.i = defaultData.id
                             this.view.splice(curIndex, 0, defaultData)
-                        }else {         // 判断在元素的下半部分
+                        }else { // 判断在元素的下半部分
                             let curIndex = idArr.findIndex(id => id==curId)
                             this.i = defaultData.id
                             this.view.splice(curIndex+1, 0, defaultData)
                         }
+                    } else {
+                        // 元素在视图上移动的情况
+                        if (direction) {
+                            // 求出鼠标所在组件在view数组中的索引
+                            let curIndex = idArr.findIndex(id => id==curId)
+                            // 求出拖拽组件的索引，由于在上边，所以减1，如果为0置为0
+                            let index = curIndex == 0 ? 0 : curIndex - 1
+                            // 移动过程中如果位置与初始位置一样，直接跳出，无需改变
+                            let result = this.view[index]['flag'] == 1
+                            if(result) return;
+                            // 求出拖拽组件初始在数组中的索引值，并在数组中移除顺便保存下来
+                            let tempIndex = idArr.findIndex(id => id==this.i)
+                            let temp = this.view.splice(tempIndex, 1)
+                            // 在最终鼠标坐在的索引前边添加移除组件数据
+                            this.view.splice(curIndex, 0, temp[0])
+                        } else {
+                            // 元素在视图下移动的情况，思路同上
+                            let curIndex = idArr.findIndex(id => id==curId)
+                            let index = curIndex + 1
+                            let result = this.view.length>index && this.view[index]['flag'] == 1
+                            if(result) return;
+                            let tempIndex = idArr.findIndex(id => id==this.i)
+                            let temp = this.view.splice(tempIndex, 1)
+                            this.view.splice(curIndex, 0, temp[0])
+                        }
                     }
-
+                    // 添加结束，将isPush设置为true
                     this.isPush = true
                 }
             },
@@ -139,7 +164,7 @@
                 this.isPush = false
                 this.type = null
             },
-            drop(e){  //拖拽结束，鼠标释放
+            drop(e){  // 拖拽到指定位置
                 if (!this.type) {  //如果此时类型值为空，直接return
                     return
                 }
