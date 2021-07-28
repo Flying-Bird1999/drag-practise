@@ -1,8 +1,10 @@
 <template>
-    <van-field
-        :type="data.type"
-        :label="data.label"
-        :disabled ="data.disabled " />
+    <div>
+        <van-field
+                :type="data.type"
+                :label="data.label"
+                :disabled ="data.disabled " />
+    </div>
 </template>
 
 <script>
