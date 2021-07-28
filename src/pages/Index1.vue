@@ -1,3 +1,6 @@
+<!--
+    这个Index1还未完成功能：组件被拖拽后，在视图上任意位置释放
+-->
 <template>
     <div class="container">
         <div class="left">
