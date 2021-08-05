@@ -253,8 +253,8 @@
             .view-content {
                 box-sizing: border-box;
                 background: #fff;
-                width: 460px;
-                height: 600px;
+                width: 90%;
+                height: 90%;
                 border-radius: 6px;
                 overflow: auto;
                 position: relative;
