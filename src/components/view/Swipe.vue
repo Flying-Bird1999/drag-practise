@@ -1,5 +1,6 @@
 <template>
-    <van-swipe :autoplay="data.autoPlay"
+    <van-swipe class="my-swipe"
+               :autoplay="data.autoPlay"
                :vertical="data.vertical"
                :show-indicators="data.showIndicators"
                :indicator-color="data.indicatorColor"
@@ -52,6 +53,7 @@
         background-color: #39a9ed;
         .image {
             width: 100%;
+            height: 100%;
         }
     }
 </style>
